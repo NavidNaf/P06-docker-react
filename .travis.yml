@@ -10,3 +10,17 @@ before_install:
 
 script: 
   - docker run navidnaf/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: #S3 Bucket name goes here
+  bucket_path: "docker" #same as the app
+  on:
+    branch: master
+  # Add environment variable in Travis CI for the AWS Keys
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
