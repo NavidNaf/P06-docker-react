@@ -1,0 +1,12 @@
+# Super User Permission
+sudo: required 
+services:
+# We need a copy of Docker Ready to go
+  - docker
+
+before_install: 
+# Some series of command, executed before our tests are ran
+  - docker build -t navidnaf/docker-react -f Dockerfile.dev .
+
+script: 
+  - docker run navidnaf/docker-react npm run test -- --coverage
